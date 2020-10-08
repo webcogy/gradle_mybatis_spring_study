@@ -1,11 +1,9 @@
 package gradle_mybatis_spring_study.config;
 
-import java.sql.SQLException;
-
-import javax.sql.DataSource;
-
 import org.apache.ibatis.logging.Log;
 import org.apache.ibatis.logging.LogFactory;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
@@ -16,8 +14,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {ContextRoot.class})
-public class ContextDataSourceTest {
-    protected static final Log log = LogFactory.getLog(ContextDataSourceTest.class);
+public class ContextSqlSessionTest {
+    protected static final Log log = LogFactory.getLog(ContextSqlSessionTest.class);
     
     @After
     public void tearDown() throws Exception {
@@ -25,14 +23,14 @@ public class ContextDataSourceTest {
     }
     
     @Autowired
-    private DataSource dataSource;
+    private SqlSessionFactory sessionFactory;
 
     @Test
-    public void testDataSource() throws SQLException {
+    public void testSqlSession() {
         log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-        log.debug("DataSource " + dataSource);
-        log.debug("LoginTimeout " + dataSource.getLoginTimeout());
-        Assert.assertNotNull(dataSource);
+        SqlSession session = sessionFactory.openSession();
+        log.debug("session " + session);
+        Assert.assertNotNull(session);
     }
 
 }
