@@ -1,5 +1,7 @@
 package gradle_mybatis_spring_study.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.logging.Log;
 import org.apache.ibatis.logging.LogFactory;
 import org.junit.After;
@@ -15,9 +17,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import gradle_mybatis_spring_study.config.ContextRoot;
 import gradle_mybatis_spring_study.dto.Student;
 
-
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {ContextRoot.class} )
+@ContextConfiguration(classes = { ContextRoot.class })
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class StudentMapperTest {
 
@@ -30,7 +31,7 @@ public class StudentMapperTest {
 
 	@Autowired
 	private StudentMapper mapper;
-	
+
 	@Test
 	public void testSelectStudentByNo() {
 		System.out.println("testSelectStudentByNo");
@@ -41,4 +42,21 @@ public class StudentMapperTest {
 		log.debug(selectedStd.toString());
 	}
 
+	@Test
+	public void selectStudentByNoWithResultMap() {
+		System.out.println("selectStudentByNoWithResultMap");
+		Student student = new Student();
+		student.setStudId(1);
+		Student selectedStd = mapper.selectStudentByNoWithResultMap(student);
+		Assert.assertNotNull(selectedStd);
+		log.debug(selectedStd.toString());
+	}
+
+	@Test
+	public void testSelectStudentByAll() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		List<Student> list = mapper.selectStudentByAll();
+		Assert.assertNotNull(list);
+		list.stream().forEach(System.out::println);
+	}
 }

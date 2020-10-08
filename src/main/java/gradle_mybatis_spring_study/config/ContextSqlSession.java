@@ -30,5 +30,4 @@ public class ContextSqlSession {
 	public SqlSessionTemplate sqlSession(SqlSessionFactory sqlSessionFactory) {
 		return new SqlSessionTemplate(sqlSessionFactory);
 	}
-	
 }
