@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="gradle_mybatis_spring_study.mapper.StudentMapper">
-	
+<mapper
+	namespace="gradle_mybatis_spring_study.mapper.StudentMapper">
+
 	<sql id="selectSQL">
-		SELECT STUD_ID AS studId, NAME, EMAIL, DOB, PHONE 
-		FROM STUDENTS
+		SELECT STUD_ID AS studId, NAME, EMAIL, DOB, PHONE
+		FROM
+		STUDENTS
 	</sql>
-	
+
 	<sql id="whereSQL">
 		<where>
 			<if test="studId != null">
@@ -14,19 +16,21 @@
 			</if>
 		</where>
 	</sql>
-	
+
+
 	<select id="selectStudentByAll" resultType="Student">
-		<include refid="selectSQL"/>
+		<include refid="selectSQL" />
 	</select>
-	
+
+
 	<select id="selectStudentByNo"
 		parameterType="gradle_mybatis_spring_study.dto.Student"
 		resultType="Student">
-		
-		<include refid="selectSQL"/>
-		<include refid="whereSQL"/>
 
+		<include refid="selectSQL" />
+		<include refid="whereSQL" />
 	</select>
+
 
 	<!-- ResultMap이용 -->
 	<resultMap type="Student" id="stdResult">
@@ -35,13 +39,41 @@
 		<result column="m" property="phone.stateCode" />
 		<result column="l" property="phone.number" />
 	</resultMap>
-	
-	<select id="selectStudentByNoWithResultMap" parameterType="Student" resultMap="stdResult">
+
+
+	<select id="selectStudentByNoWithResultMap"
+		parameterType="Student" resultMap="stdResult">
 		select stud_id, name, email, dob,
 		substr(phone, 1, 3) as f,
 		substr(phone, 5, 3) as m,
-		substr(phone, 9, 4) as l
+		substr(phone, 9, 4)
+		as l
 		from students where stud_id=#{studId}
 	</select>
-	
+
+
+	<insert id="insertStudent" parameterType="Student">
+		insert into
+		students(stud_id, name, email, phone, dob)
+		values(#{studId}, #{name},
+		#{email}, #{phone}, #{dob})
+	</insert>
+
+
+	<!-- delete -->
+	<delete id="deleteStudent" parameterType="int">
+		delete
+		from students
+		where stud_id=#{studId}
+	</delete>
+
+	<!-- update -->
+	<update id="updateStudent" parameterType="Student">
+		update students
+		set
+		name=#{name}, email=#{email},phone=#{phone}, dob=#{dob}
+		where
+		stud_id=#{studId}
+	</update>
+
 </mapper>
