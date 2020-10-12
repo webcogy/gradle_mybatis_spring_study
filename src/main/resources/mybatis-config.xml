@@ -7,10 +7,13 @@
 		<setting name="mapUnderscoreToCamelCase" value="true" />
 	</settings>
 	<typeAliases>
-		<package name="gradle_mybatis_spring_study.dto"/>
+		<package name="gradle_mybatis_spring_study.dto" />
 	</typeAliases>
 	<typeHandlers>
-		<!-- <typeHandler handler="gradle_mybatis_spring_study.handler.PhoneTypeHandler" /> -->
-		<package name="gradle_mybatis_spring_study.handler"/>
+		<!-- <typeHandler handler="gradle_mybatis_spring_study.handler.PhoneTypeHandler" 
+			/> -->
+		<typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="Gender" />
+		<package name="gradle_mybatis_spring_study.handler" />
+		<package name="gradle_mybatis_spring_study.typehandlers" />
 	</typeHandlers>
 </configuration>

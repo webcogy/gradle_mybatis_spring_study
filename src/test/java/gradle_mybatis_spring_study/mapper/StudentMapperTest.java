@@ -20,6 +20,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import gradle_mybatis_spring_study.config.ContextRoot;
+import gradle_mybatis_spring_study.dto.Gender;
 import gradle_mybatis_spring_study.dto.PhoneNumber;
 import gradle_mybatis_spring_study.dto.Student;
 
@@ -103,5 +104,70 @@ public class StudentMapperTest {
 		student.setDob(new GregorianCalendar(1988, 04, 25).getTime());
 		result = mapper.updateStudent(student);
 		Assert.assertSame(1, result);
+	}
+
+	@Test
+	public void test8SelectStudentByAllWithResultMap() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		List<Student> list = mapper.selectStudentByAllWithResultMap();
+		Assert.assertNotNull(list);
+		list.stream().forEach(System.out::println);
+	}
+
+	@Test
+	public void test9SelectStudentByAllForHashMap() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		List<Map<String, Object>> list = mapper.selectStudentByAllForHashMap();
+		Assert.assertNotNull(list);
+		for (Map<String, Object> map : list) {
+			for (Entry<String, Object> e : map.entrySet()) {
+				log.debug(String.format("%s -> %s", e.getKey(), e.getValue()));
+			}
+		}
+	}
+
+	@Test
+	public void test10SelectStudentByNoAssociation() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		Student student = new Student();
+		student.setStudId(1);
+		Student seletedStd = mapper.selectStudentByNoAssociation(student);
+		Assert.assertNotNull(seletedStd);
+		log.debug(seletedStd.toString());
+	}
+
+	@Test
+	public void test11InsertEnumStudent() {
+//		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName()+"()");
+//		Calendar newDate = GregorianCalendar.getInstance();
+//		newDate.set(1990, 2, 28);
+//		Student student = new Student();
+//		student.setStudId(3);
+//		student.setName("test");
+//		student.setEmail("test@test.co.kr");
+//		student.setDob(newDate.getTime());
+//		student.setPhone(new PhoneNumber("010-1234-1234"));
+//		student.setGender(Gender.FEMALE);
+//		
+//		int res = mapper.insertEnumStudent(student);
+//		Assert.assertEquals(1, res);
+//		student.setStudId(4);
+//		student.setName("test4");
+//		student.setEmail("test4@test.co.kr");
+//		student.setDob(newDate.getTime());
+//		student.setPhone(new PhoneNumber("010-1234-1234"));
+//		student.setGender(Gender.MALE);
+//		int res1 = mapper.insertEnumStudent(student);
+//		Assert.assertEquals(1, res1);
+	}
+	
+	@Test
+	public void test12selectStudentByNoForEnum() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		Student student = new Student();
+		student.setStudId(1);
+		Student seletedStd = mapper.selectStudentByNoAssociation(student);
+		Assert.assertNotNull(seletedStd);
+		log.debug(seletedStd.toString());
 	}
 }

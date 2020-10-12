@@ -22,5 +22,15 @@ public interface StudentMapper {
 	int updateStudent(Student student);
 	
 	// 결과 매핑
+	List<Student> selectStudentByAllWithResultMap();
+	
+	// resultMap
 	List<Map<String, Object>> selectStudentByAllForHashMap();
+	
+	// 내포된 결과매핑(ResultMap)을 사용한 일대일 매핑
+	Student selectStudentByNoAssociation(Student student);
+	
+	// 열거타입
+	int insertEnumStudent(Student student);
+	Student selectStudentByNoForEnum(Student student);
 }
