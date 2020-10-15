@@ -41,7 +41,7 @@ public class UserPicMapperTest {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		UserPic userPic = new UserPic();
 		userPic.setId(1);
-		userPic.setName("LeeYouYong");
+		userPic.setName("google");
 		userPic.setBio("put some lengthy bio here");
 		userPic.setPic(getPicFile());
 		int result = mapper.insertUserPic(userPic);
@@ -62,35 +62,35 @@ public class UserPicMapperTest {
 		return pic;
 	}
 
-	@Test
-	public void testBGetUserPic() {
-		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-		UserPic userPic = mapper.getUserPic(1);
-		if (userPic.getPic() != null) {
-			File file = getPicFile(userPic);
-			log.debug("file path " + file.getAbsolutePath());
-		}
-		Assert.assertNotNull(userPic);
-	}
-
-	private File getPicFile(UserPic userPic) {
-		File pics = new File(System.getProperty("user.dir") + "\\pics\\");
-		if (!pics.exists()) {
-			pics.mkdir();
-		}
-		File file = new File(pics, userPic.getName() + ".jpg");
-		try (FileOutputStream output = new FileOutputStream(file)) {
-			output.write(userPic.getPic());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return file;
-	}
-
-	@Test
-	public void testCDeleteUserPic() {
-		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-		int res = mapper.deleteUserPic(1);
-		Assert.assertEquals(1, res);
-	}
+//	@Test
+//	public void testBGetUserPic() {
+//		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+//		UserPic userPic = mapper.getUserPic(1);
+//		if (userPic.getPic() != null) {
+//			File file = getPicFile(userPic);
+//			log.debug("file path " + file.getAbsolutePath());
+//		}
+//		Assert.assertNotNull(userPic);
+//	}
+//
+//	private File getPicFile(UserPic userPic) {
+//		File pics = new File(System.getProperty("user.dir") + "\\pics\\");
+//		if (!pics.exists()) {
+//			pics.mkdir();
+//		}
+//		File file = new File(pics, userPic.getName() + ".png");
+//		try (FileOutputStream output = new FileOutputStream(file)) {
+//			output.write(userPic.getPic());
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		return file;
+//	}
+//
+//	/* @Test */
+//	public void testCDeleteUserPic() {
+//		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+//		int res = mapper.deleteUserPic(1);
+//		Assert.assertEquals(1, res);
+//	}
 }

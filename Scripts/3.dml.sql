@@ -28,3 +28,14 @@ INSERT ALL
     INTO COURSE_ENROLLMENT VALUES (1,2)
     INTO COURSE_ENROLLMENT VALUES (2,2)
     SELECT 1 FROM DUAL;
+
+   
+   
+   
+   
+   
+   
+   
+   
+insert into user_pics(id, name, pic, bio) 
+values (5,'google', 'test.pngtest.pngtest.png', 'put some lengthy bio here');

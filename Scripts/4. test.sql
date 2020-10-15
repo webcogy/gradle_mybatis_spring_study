@@ -23,3 +23,7 @@ SELECT STUD_ID AS studId, NAME, EMAIL, DOB, PHONE, GENDER
 		WHERE STUD_ID = 4;
 		
 SELECT * FROM USER_PICS;
+
+select course_id, name, description, start_date, end_date, tutor_id 
+from courses;
+
